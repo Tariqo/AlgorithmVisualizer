@@ -1,0 +1,1076 @@
+.comp 920 0001110100100
+.start __window_Start
+.depend "StdDebug" "20180913120454"
+.depend "StdWindow" "20180913120443"
+.depend "StdWindowAttribute" "20180913120443"
+.depend "StdTimer" "20180913120443"
+.depend "StdTimerReceiver" "20180913120443"
+.depend "StdTimerElementClass" "20180913120443"
+.depend "StdTimerAttribute" "20180913120443"
+.depend "StdReceiver" "20180913120443"
+.depend "StdReceiverAttribute" "20180913120443"
+.depend "StdMenu" "20180913120443"
+.depend "StdMenuElement" "20180913120443"
+.depend "StdMenuReceiver" "20180913120443"
+.depend "StdMenuElementClass" "20180913120443"
+.depend "StdMenuAttribute" "20180913120443"
+.depend "StdControl" "20180913120443"
+.depend "StdReceiverDef" "20180913120443"
+.depend "StdControlReceiver" "20180913120443"
+.depend "StdControlClass" "20180913120443"
+.depend "StdControlAttribute" "20180913120443"
+.depend "StdPrintText" "20180913120443"
+.depend "osprint" "20180913120443"
+.depend "StdPrint" "20180913120443"
+.depend "StdClipboard" "20180913120443"
+.depend "StdProcess" "20180913120443"
+.depend "StdProcessAttribute" "20180913120443"
+.depend "StdProcessDef" "20180913120443"
+.depend "StdSystem" "20180913120443"
+.depend "StdLibMisc" "20180913120442"
+.depend "ostick" "20180913120443"
+.depend "StdTime" "20180913120443"
+.depend "StdFileSelect" "20180913120443"
+.depend "StdPStClass" "20180913120443"
+.depend "StdPSt" "20180913120443"
+.depend "roundrobin" "20180913120443"
+.depend "processstack" "20180913120443"
+.depend "timerhandle" "20180913120443"
+.depend "processhandle" "20180913120443"
+.depend "osmenu" "20180913120443"
+.depend "StdMenuDef" "20180913120443"
+.depend "menuhandle" "20180913120442"
+.depend "devicesystemstate" "20180913120442"
+.depend "keyfocus" "20180913120442"
+.depend "commondef" "20180913120442"
+.depend "receiverhandle" "20180913120443"
+.depend "StdWindowDef" "20180913120443"
+.depend "StdControlDef" "20180913120443"
+.depend "windowhandle" "20180913120443"
+.depend "StdTimerDef" "20180913120443"
+.depend "timertable" "20180913120443"
+.depend "semidynamic" "20180913120443"
+.depend "receivertable" "20180913120443"
+.depend "receivermessage" "20180913120443"
+.depend "deviceevents" "20180913120442"
+.depend "devicefunctions" "20180913120442"
+.depend "ossystem" "20180913120443"
+.depend "osguishare" "20180913120443"
+.depend "ostime" "20180913120443"
+.depend "clCrossCall_12" "20180913120443"
+.depend "osevent" "20180913120443"
+.depend "ostoolbar" "20180913120443"
+.depend "menuCrossCall_12" "20180913120443"
+.depend "oskey" "20180913120443"
+.depend "StdKey" "20180913120443"
+.depend "StdPicture" "20180913120443"
+.depend "StdIOBasic" "20180913120443"
+.depend "StdPictureDef" "20180913120443"
+.depend "osfont" "20180913120443"
+.depend "StdFunc" "20180913120454"
+.depend "ostypes" "20180913120443"
+.depend "ostoolbox" "20180913120443"
+.depend "osrgn" "20180913120443"
+.depend "ospicture" "20180913120443"
+.depend "osbitmap" "20180913120443"
+.depend "StdBitmap" "20180913120443"
+.depend "StdIOCommon" "20180913120443"
+.depend "osdocumentinterface" "20180913120443"
+.depend "osactivaterequests" "20180913120443"
+.depend "iostate" "20180913120442"
+.depend "systemid" "20180913120443"
+.depend "device" "20180913120442"
+.depend "id" "20180913120442"
+.depend "StdMaybe" "20180913120454"
+.depend "StdId" "20180913120443"
+.depend "StdIO" "20180913120443"
+.depend "_SystemEnumStrict" "20180913120454"
+.depend "_SystemStrictLists" "20180913120454"
+.depend "StdStrictLists" "20180913120454"
+.depend "_SystemEnum" "20180913120454"
+.depend "StdEnum" "20180913120454"
+.depend "StdMisc" "20180913120454"
+.depend "StdFunctions" "20180913120454"
+.depend "StdCharList" "20180913120454"
+.depend "StdTuple" "20180913120454"
+.depend "StdOrdList" "20180913120454"
+.depend "StdList" "20180913120454"
+.depend "StdClass" "20180913120454"
+.depend "StdFile" "20180913120454"
+.depend "StdString" "20180913120454"
+.depend "_SystemArray" "20180913120454"
+.depend "StdArray" "20180913120454"
+.depend "StdChar" "20180913120454"
+.depend "StdReal" "20180913120454"
+.depend "StdInt" "20180913120454"
+.depend "StdOverloaded" "20180913120454"
+.depend "StdBool" "20180913120454"
+.depend "StdEnv" "20180913120454"
+.module m_window "window" "20210930022959"
+.endinfo
+.impmod _system
+.implab _cycle_in_spine
+.implab _type_error
+.implab _hnf
+.impdesc e_system_dind
+.implab e_system_nind e_system_eaind
+.impdesc e_system_dif
+.implab e_system_nif e_system_eaif
+.implab e_system_sif
+.impdesc e_system_dAP
+.implab e_system_nAP e_system_eaAP
+.implab e_system_sAP
+.impdesc ARRAY
+.impdesc _Nil
+.impdesc _Cons
+.impdesc _Conss
+.implab n_Conss ea_Conss
+.impdesc _Consts
+.implab n_Consts ea_Consts
+.impdesc _Conssts
+.implab n_Conssts ea_Conssts
+.impdesc _Tuple
+.impdesc d_S.1
+.implab n_S.1 ea_S.1
+.impdesc d_S.2
+.implab n_S.2 ea_S.2
+.impdesc d_S.3
+.implab n_S.3 ea_S.3
+.impdesc d_S.4
+.implab n_S.4 ea_S.4
+.impdesc d_S.5
+.implab n_S.5 ea_S.5
+.impdesc d_S.6
+.implab n_S.6 ea_S.6
+.implab _driver
+.impmod StdDebug
+.implab e_StdDebug_strace_n;6
+.impmod StdWindow
+.implab e_StdWindow_sopenWindow;55
+.impmod StdControlClass
+.impdesc e_StdControlClass_dcontrolToHandles;6
+.impdesc e_StdControlClass_dgetControlType;7
+.impdesc e_StdControlClass_rControls;
+.impmod StdProcess
+.implab e_StdProcess_sstartIO
+.impdesc e_StdProcess_dcloseProcess
+.implab e_StdProcess_ncloseProcess
+.impmod StdWindowDef
+.impdesc e_StdWindowDef_dWindow
+.impdesc e_StdWindowDef_dWindowClose
+.impdesc e_StdWindowDef_dWindowViewSize
+.impdesc e_StdWindowDef_dWindowLook
+.impdesc e_StdWindowDef_dWindowMouse
+.impmod StdPicture
+.impdesc e_StdPicture_dsetPenColour
+.implab e_StdPicture_nsetPenColour e_StdPicture_easetPenColour
+.impdesc e_StdPicture_ddrawLine
+.impdesc e_StdPicture_dfillAt;94
+.impmod StdIOBasic
+.impdesc e_StdIOBasic_rSize
+.impdesc e_StdIOBasic_tSize
+.implab e_StdIOBasic_cSize
+.impdesc e_StdIOBasic_rPoint2
+.impdesc e_StdIOBasic_tPoint2
+.implab e_StdIOBasic_cPoint2
+.impdesc e_StdIOBasic_dNilLS
+.impdesc e_StdIOBasic_dVoid
+.impmod StdPictureDef
+.impdesc e_StdPictureDef_rBox
+.impdesc e_StdPictureDef_rRGBColour
+.impdesc e_StdPictureDef_dRGB
+.impdesc e_StdPictureDef_dWhite
+.impdesc e_StdPictureDef_dDarkGrey
+.impmod StdFunc
+.implab e_StdFunc_sseq
+.impmod StdIOCommon
+.impdesc e_StdIOCommon_dAble
+.impdesc e_StdIOCommon_dMouseDown
+.impdesc e_StdIOCommon_dSDI
+.impdesc e_StdIOCommon_dProcessClose
+.impmod StdMisc
+.impdesc e_StdMisc_dundef
+.implab e_StdMisc_nundef _
+.impmod StdFunctions
+.impdesc e_StdFunctions_dconst
+.impmod StdList
+.implab e_StdList_s++
+.impmod StdString
+.implab e_StdString_stoString;5
+.implab e_StdString_s+++;11
+.impmod StdInt
+.implab e_StdInt_s+;6
+.impdesc e_StdInt_d*;9
+.implab e_StdInt_n*;9
+.implab e_StdInt_s/;10
+.implab e_StdInt_sone;11
+.implab e_StdInt_s<;17
+.impmod StdBool
+.implab e_StdBool_snot
+.export __window_Start
+.o 0 0
+__window_Start
+	buildI 65536
+	build _ 1 n1
+.d 1 0
+	jmp _driver
+.n 1 _ ea1
+.o 1 0
+n1
+	push_node _cycle_in_spine 1
+.o 2 0
+ea1
+	jsr_eval 0
+.o 2 0
+s1
+	buildh _Nil 0
+	buildh e_StdProcess_dcloseProcess 0
+	buildh e_StdIOCommon_dProcessClose 1
+	buildh _Cons 2
+	buildh d18 0
+	buildh e_StdIOBasic_dVoid 0
+	buildh e_StdIOCommon_dSDI 0
+	push_a 4
+	push_a 4
+	update_a 1 5
+	update_a 2 1
+	update_a 3 2
+	update_a 4 3
+	update_a 0 4
+	pop_a 1
+	update_a 4 5
+	update_a 3 4
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+.d 6 0
+	jmp e_StdProcess_sstartIO
+.desc d18 _hnf l18 1 0 "initProcessState;17"
+.o 2 0
+l18
+	pop_a 1
+.d 1 0
+	jsr ea18
+.o 2 0
+.impmod iostate
+.impdesc e_iostate_rPSt
+	build_r e_iostate_rPSt 2 0 0 0
+	updatepop_a 0 2
+.d 1 0
+	rtn
+.o 1 0
+ea18
+	jsr_eval 0
+	repl_r_args 2 0
+.o 2 0
+s18
+	buildh _Nil 0
+	buildh d16 0
+	buildh e_StdIOCommon_dAble 0
+	buildB TRUE
+	buildh e_StdFunctions_dconst 1
+	buildh e_StdWindowDef_dWindowMouse 3
+	buildh _Cons 2
+	buildh d15 0
+	buildB TRUE
+	buildh e_StdWindowDef_dWindowLook 2
+	buildh _Cons 2
+	buildI 16
+	buildI 32
+	build _ 2 e_StdInt_n*;9
+	buildI 16
+	buildI 32
+	build _ 2 e_StdInt_n*;9
+	build e_StdIOBasic_tSize 2 e_StdIOBasic_cSize
+	buildh e_StdWindowDef_dWindowViewSize 1
+	buildh _Cons 2
+	buildh d17 0
+	buildh e_StdWindowDef_dWindowClose 1
+	buildh _Cons 2
+	buildh e_StdIOBasic_dNilLS 0
+	buildAC "Title"
+	buildh ARRAY 1
+	buildh e_StdWindowDef_dWindow 3
+	build _ 0 e_StdMisc_nundef
+	buildh e_StdControlClass_dgetControlType;7 0
+	buildh e_StdControlClass_dcontrolToHandles;6 0
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 2 6
+	update_a 4 2
+	update_a 0 4
+	update_a 5 0
+	update_a 1 5
+	update_a 3 1
+	update_a 0 3
+	pop_a 1
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+.d 6 0
+	jsr e_StdWindow_sopenWindow;55
+.o 3 0
+	pop_a 1
+.d 2 0
+	rtn
+.desc d17 _hnf l17 1 0 "quit;16"
+.o 2 0
+l17
+	pop_a 1
+.o 1 0
+ea17
+	jsr_eval 0
+	repl_args 2 2
+	push_a 1
+	build e_StdProcess_dcloseProcess 1 e_StdProcess_ncloseProcess
+	push_a 1
+	update_a 1 3
+	updatepop_a 0 2
+	push_a 1
+	push_a 1
+	buildh _Tuple 2
+	updatepop_a 0 2
+.d 1 0
+	rtn
+.desc d15 _hnf l15 3 0 "paintFun;14"
+.a 3 ea15
+.o 2 0
+l15
+	push_args 0 2 2
+	update_a 3 2
+	create
+	update_a 0 4
+	pop_a 1
+.o 4 0
+ea15
+.o 4 0
+s15
+	push_a 2
+	build _ 1 n12
+	build _ 1 n14
+	updatepop_a 0 3
+.d 2 0
+	jmp s13
+.o 2 0
+s13
+	buildh e_StdPictureDef_dDarkGrey 0
+	push_a 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	build e_StdPicture_dsetPenColour 2 e_StdPicture_nsetPenColour
+	buildh _Nil 0
+	buildI 32
+	buildh _Cons 2
+	buildI 0
+	buildh _Cons 2
+	build _ 1 n7
+	create
+	pushI 32
+	pushI 0
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+.d 1 2 ii
+	jsr s5
+.o 1 0
+	create
+	push_a 2
+	update_a 1 3
+	update_a 2 1
+	update_a 0 2
+	pop_a 1
+.d 3 0
+	jsr e_StdList_s++
+.o 1 0
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr e_StdFunc_sseq
+.o 1 0
+	fill_a 0 1
+	pop_a 1
+.d 1 0
+	rtn
+.n 4 _ ea4
+.o 1 0
+n4
+	push_node _cycle_in_spine 4
+.o 5 0
+ea4
+	jsr_eval 3
+.o 5 0
+s4
+	push_a 1
+	push_a 1
+	push_a 4
+	push_a 6
+	update_a 3 7
+	update_a 2 6
+	update_a 1 5
+	updatepop_a 0 4
+.d 5 0
+	jmp s30
+.o 1 2 ii
+s5
+	push_b 0
+	push_b 2
+	ltI
+	notB
+	jmp_false else.1
+	buildh _Nil 0
+	buildI 32
+	buildh _Cons 2
+	buildI 0
+	buildh _Cons 2
+	buildI_b 0
+	buildI_b 1
+	buildI_b 0
+	pop_b 2
+.d 5 0
+	jmp s4
+else.1
+	fillh _Nil 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.o 5 0
+s30
+	eq_desc _Cons 2 0
+	jmp_true case.2
+	jmp case.3
+case.2
+	repl_args 2 2
+	push_a 1
+	push_a 3
+	push_a 6
+	push_a 6
+	build _ 4 n4
+	buildI 16
+	buildI 31
+	build _ 2 e_StdInt_n*;9
+	buildI 16
+	push_a 5
+	build _ 2 e_StdInt_n*;9
+	build e_StdIOBasic_tPoint2 2 e_StdIOBasic_cPoint2
+	buildI 16
+	push_a 3
+	build _ 2 e_StdInt_n*;9
+	buildI 16
+	push_a 6
+	build _ 2 e_StdInt_n*;9
+	build e_StdIOBasic_tPoint2 2 e_StdIOBasic_cPoint2
+	buildh e_StdPicture_ddrawLine 2
+	fillh _Cons 2 7
+	pop_a 5
+.d 1 0
+	rtn
+case.3
+	push_a 3
+	jsr_eval 0
+	pushI_a 4
+	pop_a 1
+	pushI 1
+	push_a 2
+	jsr_eval 0
+	pushI_a 3
+	pop_a 1
+	addI
+	pop_a 4
+.d 1 2 ii
+	jmp s5
+.o 3 2 ii
+s6
+	push_b 0
+	push_b 2
+	ltI
+	notB
+	jmp_false else.4
+	push_b 1
+	push_b 1
+	push_a 1
+	push_a 1
+	build_u _ 2 2 n35
+	buildI 16
+	buildI_b 0
+	build _ 2 e_StdInt_n*;9
+	buildI 16
+	buildI 31
+	build _ 2 e_StdInt_n*;9
+	build e_StdIOBasic_tPoint2 2 e_StdIOBasic_cPoint2
+	buildI 16
+	buildI_b 0
+	build _ 2 e_StdInt_n*;9
+	buildI 16
+	push_a 5
+	build _ 2 e_StdInt_n*;9
+	build e_StdIOBasic_tPoint2 2 e_StdIOBasic_cPoint2
+	buildh e_StdPicture_ddrawLine 2
+	fillh _Cons 2 4
+	pop_a 2
+	pop_b 2
+.d 1 0
+	rtn
+else.4
+	push_a 0
+	jsr_eval 0
+	updatepop_a 0 2
+	pop_b 2
+.d 2 0
+	jmp s7
+.nu 2 2 _ _
+.o 1 0
+n35
+	push_node_u _cycle_in_spine 2 2
+.o 3 2 ii
+ea35
+.o 3 2 ii
+s35
+	pushI 1
+	push_b 1
+	addI
+	push_b 2
+	push_a 1
+	push_a 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	update_a 1 3
+	updatepop_a 0 2
+	update_b 1 3
+	updatepop_b 0 2
+.d 3 2 ii
+	jmp s6
+.n 1 _ ea7
+.o 1 0
+n7
+	push_node _cycle_in_spine 1
+.o 2 0
+ea7
+.o 2 0
+s7
+	push_a 0
+	updatepop_a 0 1
+.d 2 0
+	jmp s29
+.o 2 0
+s29
+	eq_desc _Cons 2 0
+	jmp_true case.5
+	jmp case.6
+case.5
+	repl_args 2 2
+	pushI 32
+	pushI 0
+	push_a 0
+	push_a 2
+	update_a 1 3
+	updatepop_a 0 2
+.d 3 2 ii
+	jmp s6
+case.6
+	fillh _Nil 0 1
+	pop_a 1
+.d 1 0
+	rtn
+.n 1 _ ea14
+.o 1 0
+n14
+	push_node _cycle_in_spine 1
+.o 2 0
+ea14
+.o 2 0
+s14
+	pushI 16
+	pushI 16
+	build_r e_StdPictureDef_rBox 0 2 0 0
+	pop_b 2
+	pushI 124
+	pushI 156
+	pushI 59
+	build_r e_StdPictureDef_rRGBColour 0 3 0 0
+	pop_b 3
+	buildh e_StdPictureDef_dRGB 1
+	push_a 2
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	build e_StdPicture_dsetPenColour 2 e_StdPicture_nsetPenColour
+	buildh _Nil 0
+	buildI 31
+	buildh _Cons 2
+	buildI 0
+	buildh _Cons 2
+	push_a 2
+	build _ 2 n23
+	create
+	pushI 31
+	pushI 0
+	push_a 3
+	buildh _Nil 0
+	update_a 0 5
+	update_a 0 6
+	pop_a 1
+.d 2 2 ii
+	jsr s21
+.o 1 0
+	create
+	push_a 2
+	update_a 1 3
+	update_a 2 1
+	update_a 0 2
+	pop_a 1
+.d 3 0
+	jsr e_StdList_s++
+.o 1 0
+	update_a 1 3
+	updatepop_a 0 2
+.d 2 0
+	jsr e_StdFunc_sseq
+.o 1 0
+	fill_a 0 1
+	pop_a 1
+.d 1 0
+	rtn
+.n 5 _ ea22
+.o 1 0
+n22
+	push_node _cycle_in_spine 5
+.o 6 0
+ea22
+	jsr_eval 4
+.o 6 0
+s22
+	push_a 2
+	push_a 2
+	push_a 2
+	push_a 6
+	push_a 8
+	update_a 4 9
+	update_a 3 8
+	update_a 2 7
+	update_a 1 6
+	updatepop_a 0 5
+.d 6 0
+	jmp s28
+.o 2 2 ii
+s21
+	push_b 0
+	push_b 2
+	ltI
+	notB
+	jmp_false else.7
+	buildh _Nil 0
+	buildI 31
+	buildh _Cons 2
+	buildI 0
+	buildh _Cons 2
+	buildI_b 0
+	buildI_b 1
+	buildI_b 0
+	push_a 4
+	update_a 4 5
+	update_a 3 4
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+	pop_b 2
+.d 6 0
+	jmp s22
+else.7
+	fillh _Nil 0 1
+	pop_a 1
+	pop_b 2
+.d 1 0
+	rtn
+.o 6 0
+s28
+	eq_desc _Cons 2 0
+	jmp_true case.8
+	jmp case.9
+case.8
+	repl_args 2 2
+	push_a 1
+	push_a 3
+	push_a 7
+	push_a 7
+	push_a 7
+	build _ 5 n22
+	buildI 16
+	push_a 2
+	build _ 2 e_StdInt_n*;9
+	buildI 16
+	push_a 5
+	build _ 2 e_StdInt_n*;9
+	build e_StdIOBasic_tPoint2 2 e_StdIOBasic_cPoint2
+	push_a 5
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh e_StdPicture_dfillAt;94 2
+	fillh _Cons 2 8
+	pop_a 6
+.d 1 0
+	rtn
+case.9
+	push_a 4
+	jsr_eval 0
+	pushI_a 5
+	pop_a 1
+	pushI 1
+	push_a 3
+	jsr_eval 0
+	pushI_a 4
+	pop_a 1
+	addI
+	push_a 2
+	updatepop_a 0 5
+.d 2 2 ii
+	jmp s21
+.o 4 2 ii
+s24
+	push_b 0
+	push_b 2
+	ltI
+	notB
+	jmp_false else.10
+	push_b 1
+	push_b 1
+	push_a 2
+	push_a 2
+	push_a 2
+	build_u _ 3 2 n34
+	buildI 16
+	buildI_b 0
+	build _ 2 e_StdInt_n*;9
+	buildI 16
+	push_a 5
+	build _ 2 e_StdInt_n*;9
+	build e_StdIOBasic_tPoint2 2 e_StdIOBasic_cPoint2
+	push_a 2
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh e_StdPicture_dfillAt;94 2
+	fillh _Cons 2 5
+	pop_a 3
+	pop_b 2
+.d 1 0
+	rtn
+else.10
+	push_a 1
+	jsr_eval 0
+	push_a 1
+	update_a 1 4
+	updatepop_a 0 3
+	pop_b 2
+.d 3 0
+	jmp s23
+.nu 3 2 _ _
+.o 1 0
+n34
+	push_node_u _cycle_in_spine 3 2
+.o 4 2 ii
+ea34
+.o 4 2 ii
+s34
+	pushI 1
+	push_b 1
+	addI
+	push_b 2
+	push_a 2
+	push_a 2
+	push_a 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	update_a 2 5
+	update_a 1 4
+	updatepop_a 0 3
+	update_b 1 3
+	updatepop_b 0 2
+.d 4 2 ii
+	jmp s24
+.n 2 _ ea23
+.o 1 0
+n23
+	push_node _cycle_in_spine 2
+.o 3 0
+ea23
+.o 3 0
+s23
+	push_a 0
+	push_a 2
+	update_a 1 3
+	updatepop_a 0 2
+.d 3 0
+	jmp s27
+.o 3 0
+s27
+	eq_desc _Cons 2 0
+	jmp_true case.11
+	jmp case.12
+case.11
+	repl_args 2 2
+	pushI 31
+	pushI 0
+	push_a 0
+	push_a 2
+	push_a 4
+	update_a 2 5
+	update_a 1 4
+	updatepop_a 0 3
+.d 4 2 ii
+	jmp s24
+case.12
+	fillh _Nil 0 2
+	pop_a 2
+.d 1 0
+	rtn
+.n 1 _ ea12
+.o 1 0
+n12
+	push_node _cycle_in_spine 1
+.o 2 0
+ea12
+.o 2 0
+s12
+	buildh e_StdPictureDef_dWhite 0
+	push_a 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	build e_StdPicture_dsetPenColour 2 e_StdPicture_nsetPenColour
+	pushI 16
+	pushI 16
+	build_r e_StdPictureDef_rBox 0 2 0 0
+	pop_b 2
+	create
+	pushI 30
+	pushI 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+.d 2 2 ii
+	jsr s19
+.o 1 0
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr e_StdFunc_sseq
+.o 1 0
+	fill_a 0 1
+	pop_a 1
+.d 1 0
+	rtn
+.o 5 2 ii
+s20
+	push_b 0
+	push_b 2
+	ltI
+	notB
+	jmp_false else.13
+	push_b 1
+	push_b 1
+	push_a 3
+	push_a 3
+	push_a 3
+	push_a 3
+	build_u _ 4 2 n33
+	buildI 16
+	buildI_b 0
+	build _ 2 e_StdInt_n*;9
+	buildI 16
+	push_a 6
+	build _ 2 e_StdInt_n*;9
+	build e_StdIOBasic_tPoint2 2 e_StdIOBasic_cPoint2
+	push_a 2
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh e_StdPicture_dfillAt;94 2
+	fillh _Cons 2 6
+	pop_a 4
+	pop_b 2
+.d 1 0
+	rtn
+else.13
+	push_a 2
+	jsr_eval 0
+	pushI_a 3
+	pop_a 1
+	pushI 1
+	push_a 1
+	jsr_eval 0
+	pushI_a 2
+	pop_a 1
+	addI
+	push_a 0
+	updatepop_a 0 4
+	update_b 1 3
+	updatepop_b 0 2
+.d 2 2 ii
+	jmp s19
+.nu 4 2 _ _
+.o 1 0
+n33
+	push_node_u _cycle_in_spine 4 2
+.o 5 2 ii
+ea33
+.o 5 2 ii
+s33
+	pushI 1
+	push_b 1
+	addI
+	push_b 2
+	push_a 3
+	push_a 3
+	push_a 3
+	push_a 3
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	update_a 3 7
+	update_a 2 6
+	update_a 1 5
+	updatepop_a 0 4
+	update_b 1 3
+	updatepop_b 0 2
+.d 5 2 ii
+	jmp s20
+.o 2 2 ii
+s19
+	push_b 0
+	push_b 2
+	ltI
+	notB
+	jmp_false else.14
+	pushI 30
+	pushI 1
+	buildI_b 2
+	buildI_b 3
+	buildI_b 2
+	push_a 3
+	update_a 3 4
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+	update_b 1 3
+	updatepop_b 0 2
+.d 5 2 ii
+	jmp s20
+else.14
+	fillh _Nil 0 1
+	pop_a 1
+	pop_b 2
+.d 1 0
+	rtn
+.desc d16 _hnf l16 2 0 "handlingMouseEvent;15"
+.a 0 a16
+.o 2 0
+l16
+	repl_args 1 1
+.o 2 0
+a16
+.d 2 0
+	jsr ea16
+.o 2 0
+	push_a 1
+	push_a 1
+	buildh _Tuple 2
+	updatepop_a 0 2
+.d 1 0
+	rtn
+.o 2 0
+ea16
+	jsr_eval 0
+.o 2 0
+s16
+	eq_desc e_StdIOCommon_dMouseDown 3 0
+	jmp_true case.15
+	jmp case.16
+case.15
+	repl_args 3 3
+	update_a 0 2
+	pop_a 2
+	jsr_eval 0
+	push_r_args_b 0 0 2 2 1
+	pushI 16
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	divI
+.d 0 1 i
+	jsr ItoAC
+.o 1 0
+	buildAC ")"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC ", "
+.d 2 0
+	jsr catAC
+.o 1 0
+	push_r_args_b 1 0 2 1 1
+	pushI 16
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	divI
+	buildh _Nil 0
+	update_a 0 2
+	pop_a 1
+.d 0 1 i
+	jsr ItoAC
+.o 1 0
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "clicked tile: ("
+.d 2 0
+	jsr catAC
+.o 1 0
+	push_a 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr e_StdDebug_strace_n;6
+.o 1 0
+	repl_args 2 2
+.d 2 0
+	rtn
+case.16
+	jsr_eval 1
+	pop_a 1
+	repl_args 2 2
+.d 2 0
+	rtn
