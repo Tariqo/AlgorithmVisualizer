@@ -1,8 +1,9 @@
-module window
-
-
+module Window
 import StdEnv, StdIO, StdFunc, StdDebug ///StdFunc contains seq, StdDebug contains trace_n
 
+
+
+:: AState = { windowId :: !Id }
 
 ///constants
 TILE_SIZE :== 16 //pixels, the amount of pixles that will be drawable on
@@ -10,23 +11,26 @@ BORDER_TILES :== 16
 
 
 Start:: *World -> *World
-Start world = startIO SDI Void initProcessState [ProcessClose closeProcess] world
-where 
-
-	initProcessState pst /// initialization of the interface program.
-	# (errorM, pst) = openWindow undef window pst
-	= pst 
-	where
-
+Start world 
+#as = {windowId = wid}
+= startIO SDI as (initIO (wid)) [ProcessClose closeProcess] world1
+where
+		(wid ,world1 ) = openId world
 		/// _____________ Elements Gui initialization Area_____________
-		window = Window "Title" NilLS 
-					[ WindowClose quit, /// using the quit function defined below.
-					  WindowViewSize {w = 32*TILE_SIZE, h = 32*TILE_SIZE}, //Window size.
-					  WindowLook True paintFun,   /// This will take the state and update state away.
-					  WindowMouse (const True) Able handlingMouseEvent /// defines a mouse event system and attach handlingMouseEvent function to it.
-					  ]
-
-
+				
+		initIO :: !Id (PSt AState) -> (PSt AState)
+		initIO w_inits=:(wid) pst=:{ls}
+		# (errorM, newPst) = openWindow undef (window) pst
+		= newPst
+		where
+			window = Window "Algorithm Visulizer" NilLS
+							[ 
+							WindowId wid,
+							WindowClose quit, /// using the quit function defined below.
+				 			WindowViewSize {w = 32*TILE_SIZE, h = 32*TILE_SIZE}, //Window size.
+							WindowLook True paintFun,   /// This will take the state and update state away.
+				 			WindowMouse (const True) Able handlingMouseEvent /// defines a mouse event system and attach handlingMouseEvent function to it.
+				 	 		 ]
 
 		///__________ Window painting functions __________________
 		/***/
@@ -72,15 +76,22 @@ where
 
 		///____________ Mouse Handling events functions_____________
 
-		handlingMouseEvent :: MouseState (.ls, *PSt .l) -> (.ls,*PSt .l)
-		handlingMouseEvent (MouseDown hitPoint _ _) pst	
-			# msg = ("clicked tile: (" +++ toString (hitPoint.x / TILE_SIZE) +++ ", " +++ toString (hitPoint.y / TILE_SIZE) +++ ")")
-			=  trace_n msg pst
+		handlingMouseEvent :: MouseState (.ls, *PSt AState) -> (.ls,*PSt AState)
+		handlingMouseEvent (MouseDown hitPoint _ _) (pst=:(nil, {ls=lst, io=ioState}))	
+			# xCord = (hitPoint.x / TILE_SIZE)
+			# yCord = (hitPoint.y / TILE_SIZE)
+			# msg = ("clicked tile: (" +++ toString xCord +++ ", " +++ toString yCord +++ ")")
+			| xCord < 1  || xCord > 30 = pst
+			| yCord < 1  || yCord > 30 = pst 
+			=  trace_n msg (nil, {ls=lst, io= appWindowPicture (lst.windowId) (drawBlackDot xCord yCord) ioState} )
 		handlingMouseEvent _ pst =  pst
-
+		
+		drawBlackDot :: Int Int *Picture -> *Picture 
+		drawBlackDot xCord yCord pic 
+		#pic = setPenColour Black pic
+		=  fillAt {x=xCord * TILE_SIZE ,y= yCord * TILE_SIZE} {box_h= TILE_SIZE, box_w= TILE_SIZE} pic 
 
 		///____________ Other Window Handling events functions_____________
 
 		quit:: (.ls, *PSt .l) -> (.ls, *PSt .l)
 		quit (local, pst) = (local, closeProcess pst)
-

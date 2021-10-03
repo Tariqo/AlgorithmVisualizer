@@ -1,0 +1,11 @@
+#files to be ignored when commiting
+
+src/Clean System Files/
+Clean System Files/
+
+src/Archive/
+Archive/
+
+
+*.prp
+*.exe
