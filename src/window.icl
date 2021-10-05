@@ -1,4 +1,4 @@
-module Window
+module window
 import StdEnv, StdIO, StdFunc, StdDebug ///StdFunc contains seq, StdDebug contains trace_n
 
 
@@ -12,17 +12,20 @@ BORDER_TILES :== 16
 
 Start:: *World -> *World
 Start world 
-#as = {windowId = wid}
-= startIO SDI as (initIO (wid)) [ProcessClose closeProcess] world1
+	#(wid ,world1) = openId world
+	#as = {windowId = wid}
+	= startIO SDI as (initIO (wid)) [ProcessClose closeProcess] world1
 where
-		(wid ,world1 ) = openId world
 		/// _____________ Elements Gui initialization Area_____________
 				
-		initIO :: !Id (PSt AState) -> (PSt AState)
-		initIO w_inits=:(wid) pst=:{ls}
-		# (errorM, newPst) = openWindow undef (window) pst
-		= newPst
+		initIO (wid) = openwindow o openfilemenu
 		where
+			openfilemenu = snd o openMenu undef file
+			file = Menu "&File"
+					(   MenuItem "&Start" [MenuShortKey 'R',MenuFunction (noLS closeProcess)] //should be algo function
+					:+: MenuItem "&Quit" [MenuShortKey 'Q',MenuFunction (noLS closeProcess)]
+					) []
+			openwindow = snd o openWindow undef window
 			window = Window "Algorithm Visulizer" NilLS
 							[ 
 							WindowId wid,
