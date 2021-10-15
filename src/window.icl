@@ -1,13 +1,5 @@
 module window
 import StdEnv, StdIO, StdFunc, StdDebug ///StdFunc contains seq, StdDebug contains trace_n
-<<<<<<< HEAD
-=======
-
-/*
-x and y is reversed everywhere fuck this
-*/
-
->>>>>>> e8db8a2 (A* Algorithm implemented)
 
 :: NodeA = {
 	nodeX :: Int,
@@ -17,45 +9,13 @@ x and y is reversed everywhere fuck this
 	gCost :: Real,
 	hCost :: Real,
 	fCost :: Real,
-<<<<<<< HEAD
-	isObsticle :: Bool
-	}
-/*
-instance < NodeA 
-where
-	(<) a b = a.fCost < b.fCost
-*/
-//isValidSquare :: Int Int (*PSt AState) -> Bool
-//isDest :: Node (*PSt AState) -> Bool
-
-//calculateH :: Int Int (*Pst Astate) -> Bool 
-
-
-
-:: AState = { 
-	windowId :: !Id, 
-	map :: {NodeA},
-	startPointDrawn :: Bool,
-	endPointDrawn :: Bool,
-	startPoint :: Point2,
-	endPoint :: Point2
-	}
-
-///constants
-TILE_AMOUNT :== 32 // The amount of tiles that will be drawable on
-TILE_SIZE :==19  //Size of the drawable tiles
-=======
 	isObstacle :: Bool
 	}
 
->>>>>>> e8db8a2 (A* Algorithm implemented)
-
 instance < NodeA 
 where
 	(<) a b = a.fCost < b.fCost
-
-<<<<<<< HEAD
-=======
+	
 instance == NodeA 
 where
 	(==) a b = a.nodeX == b.nodeX && a.nodeY == b.nodeY 
@@ -177,20 +137,11 @@ TILE_AMOUNT :== 60 // The amount of tiles that will be drawable on
 TILE_SIZE :==10  //Size of the drawable tiles
 
 
->>>>>>> e8db8a2 (A* Algorithm implemented)
 Start:: *World -> *World
 Start world 
 	#(wid ,world1) = openId world
 	#as = {
 			windowId = wid,
-<<<<<<< HEAD
-			map = {{nodeX=xCord, nodeY=yCord, parentX=(-1), parentY=(-1), gCost=100000000.0, fCost=100000000.0, hCost=100000000.0, isObsticle=False}
-						 \\ xCord <-[1..TILE_AMOUNT-2], yCord <-[1..TILE_AMOUNT-2]},
-			startPointDrawn = False,
-			endPointDrawn = False,
-			startPoint = {x = (-1), y =(-1)},
-			endPoint = {x = (-1), y =(-1)}
-=======
 			map = {{nodeX=yCord, nodeY=xCord, parentX=(-1), parentY=(-1), gCost=100000000.0, fCost=100000000.0, hCost=100000000.0, isObstacle=False}
 						 \\ xCord <-[1..TILE_AMOUNT-2], yCord <-[1..TILE_AMOUNT-2]},
 			startPointDrawn = False,
@@ -200,7 +151,6 @@ Start world
 			endPoint = {x = (-1), y =(-1)},
 			closedList = [False \\ xCord <-[1..TILE_AMOUNT-2], yCord <-[1..TILE_AMOUNT-2]],
 			openList = []
->>>>>>> e8db8a2 (A* Algorithm implemented)
 			}
 			
 	= startIO SDI as (initIO (wid)) [ProcessClose closeProcess] world1
@@ -211,11 +161,7 @@ where
 		where
 			openfilemenu = snd o openMenu undef file
 			file = Menu "&File"
-<<<<<<< HEAD
-					(   MenuItem "&Start" [MenuShortKey 'R',MenuFunction (noLS closeProcess)] //should be algo function
-=======
 					(   MenuItem "&Start" [MenuShortKey 'R',MenuFunction (noLS drawStuff)] //should be algo function
->>>>>>> e8db8a2 (A* Algorithm implemented)
 					:+: MenuItem "&Quit" [MenuShortKey 'Q',MenuFunction (noLS closeProcess)]
 					) []
 			openwindow = snd o openWindow undef window
@@ -274,18 +220,6 @@ where
 
 		handlingMouseEvent :: MouseState (.ls, *PSt AState) -> (.ls,*PSt AState)
 		handlingMouseEvent (MouseDown hitPoint _ _) (pst=:(nil, {ls=lst, io=ioState}))	
-<<<<<<< HEAD
-			# xCord = (hitPoint.x / TILE_SIZE)
-			# yCord = (hitPoint.y / TILE_SIZE)
-			# msg = ("clicked tile: (" +++ toString xCord +++ ", " +++ toString yCord +++ ") " +++ toString (size lst.map)) 
-			| xCord < 1  || xCord > TILE_AMOUNT-2 = pst 
-			| yCord < 1  || yCord > TILE_AMOUNT-2 = pst 
-			| not lst.startPointDrawn = trace_n (msg +++ " Start point") (nil, {ls={lst & startPointDrawn = True , startPoint = {x =xCord,y =yCord} } , io= appWindowPicture (lst.windowId) (drawStartPoint xCord yCord) ioState} )
-			| not lst.endPointDrawn = trace_n (msg +++ " End point") (nil, {ls={lst & endPointDrawn = True, endPoint = {x =xCord,y =yCord} } , io= appWindowPicture (lst.windowId) (drawEndPoint xCord yCord) ioState} )
-			=  trace_n msg (nil, {ls=lst, io= appWindowPicture (lst.windowId) (drawBlackDot xCord yCord) ioState} )
-		handlingMouseEvent _ pst =  pst
-		
-=======
 		# xCord = (hitPoint.x / TILE_SIZE)
 		# yCord = (hitPoint.y / TILE_SIZE)
 		# msg = ("clicked tile: (" +++ toString xCord +++ ", " +++ toString yCord +++ ") ") +++ toString (((xCord-1)  + ((yCord-1))* TILE_AMOUNT )  - (2 * (yCord-1)))
@@ -316,8 +250,7 @@ where
 		updateStartPoint x y list
 		# index = ((x-1)  + ((y-1))* TILE_AMOUNT )  - (2 * (y-1))
 		= trace_n (toString index ){(\a b | b == index = {nodeX = x, nodeY = y, parentX = x, parentY = y, gCost = 0.0, hCost = 0.0, fCost = 0.0, isObstacle = False} = a)a b \\ a<-:list & b<-[0..]}
->>>>>>> e8db8a2 (A* Algorithm implemented)
-		
+	
 		drawStartPoint :: Int Int *Picture -> *Picture
 		drawStartPoint xCord yCord pic 
 		#pic = setPenColour Yellow pic
@@ -338,12 +271,6 @@ where
 
 		quit:: (.ls, *PSt .l) -> (.ls, *PSt .l)
 		quit (local, pst) = (local, closeProcess pst)
-<<<<<<< HEAD
-=======
-
 		drawStuff:: (*PSt AState) -> ( *PSt AState)
 		drawStuff pst=:{ls=lst,io=ios} 
-
 		= aStar pst //{pst & ls = {lst & map = newMap}, io = newIo }//  /*trace_n (toString lst.map )*/ aStar pst 
-
->>>>>>> e8db8a2 (A* Algorithm implemented)
