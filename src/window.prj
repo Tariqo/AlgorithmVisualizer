@@ -8,10 +8,10 @@ Global
 		CheckIndexes:	True
 	Application
 		HeapSize:	209715200
-		StackSize:	5120000
+		StackSize:	10485760
 		ExtraMemory:	81920
-		IntialHeapSize:	2048000
-		HeapSizeMultiplier:	25600
+		IntialHeapSize:	204800
+		HeapSizeMultiplier:	4096
 		ShowExecutionTime:	False
 		ShowGC:	False
 		ShowStackSize:	False
