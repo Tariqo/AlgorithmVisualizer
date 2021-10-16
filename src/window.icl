@@ -1,6 +1,11 @@
 module window
 import StdEnv, StdIO, StdFunc, StdDebug ///StdFunc contains seq, StdDebug contains trace_n
 
+/*
+x and y is reversed everywhere fuck this
+*/
+
+
 :: NodeA = {
 	nodeX :: Int,
 	nodeY :: Int,
@@ -12,10 +17,11 @@ import StdEnv, StdIO, StdFunc, StdDebug ///StdFunc contains seq, StdDebug contai
 	isObstacle :: Bool
 	}
 
+
 instance < NodeA 
 where
 	(<) a b = a.fCost < b.fCost
-	
+
 instance == NodeA 
 where
 	(==) a b = a.nodeX == b.nodeX && a.nodeY == b.nodeY 
@@ -44,11 +50,28 @@ drawRedDot xCord yCord pic
 #pic = setPenColour Red pic
 =  fillAt {x=xCord * TILE_SIZE ,y= yCord * TILE_SIZE} {box_h= TILE_SIZE, box_w= TILE_SIZE} pic 
 
+drawGreyDot :: Int Int *Picture -> *Picture 
+drawGreyDot xCord yCord pic 
+#pic = setPenColour Grey pic
+=  fillAt {x=xCord * TILE_SIZE ,y= yCord * TILE_SIZE} {box_h= TILE_SIZE, box_w= TILE_SIZE} pic 
+
+
 color :: Int Int (*PSt AState) -> (*PSt AState)
 color x y  pst =:{ls=lst,io=ioState}
 | x < 1  || x > TILE_AMOUNT-2 = pst 
 | y < 1  || y > TILE_AMOUNT-2 = pst 
 = color (x+1) (y+1) {ls=lst,  io = appWindowPicture (lst.windowId) (drawRedDot x y) ioState}
+
+
+
+dFS :: {NodeA} NodeA Int -> {NodeA}
+dFS map start 50 = map
+dFS map start num
+#startindex = ((start.nodeX-1)  + ((start.nodeY-1))* TILE_AMOUNT )  - (2 * (start.nodeY-1))
+#newMap = {(\x y | y == startindex = {x& isObstacle = True} = x )a b \\ a<-:map & b<-[0..]}
+|isValidSquare start = trace_n (toString startindex) dFS newMap (newMap.[startindex + ([1,TILE_AMOUNT, (-1)] !! ((\x = x rem 3) num))  ] ) (num+1)
+= map 
+
 
 
 
@@ -66,12 +89,16 @@ where
 	index = ((x-1)  + ((y-1))* TILE_AMOUNT )  - (2 * (y-1))
 	
 removeNodes :: (*PSt AState) -> (NodeA, (*PSt AState))
-removeNodes pst=:{ls=lst, io=ios} = (node, {pst & ls = {lst & openList = list , closedList = updateClosedList lst.closedList node.nodeX node.nodeY }} ) 
+removeNodes pst=:{ls=lst, io=ios} = (node, {pst & ls = {lst & openList = list , closedList = updateClosedList lst.closedList node.nodeX node.nodeY }, io = newio } ) 
 where
+	newio = seq fillingFuncs ios
+	fillingFuncs = [appWindowPicture (lst.windowId) (drawGreyDot a b) \\ (a,b)<- listindicies]
+	listindicies = map (\x= (x.nodeX, x.nodeY)) list 
 	(node,list) = filterNodes lst.openList 
 
 
 aStar :: (*PSt AState)  -> (*PSt AState)
+//aStar pst 15 = pst
 aStar pst 
 # (node,newpst=:{ls=lst,io=ioState}) = removeNodes pst 
 = checkNeighbors node newpst 
@@ -84,9 +111,17 @@ func pst _ _ [] _ _ = pst
 func pst=:{ls = lst,io=ioState} org map [x:xs] closedList dest 
 # index = ((x.nodeX-1)  + ((x.nodeY-1))* TILE_AMOUNT )  - (2 * (x.nodeY-1))
 # cond = isValidSquare x && not (closedList!!index) && (map.[index].fCost >=  100000000.0 || map.[index].fCost > (thd3 (makeNewNode x org dest))) 
-| isDest x dest = abort "you win"
+| isDest x dest = makePath pst org
 | cond = /* trace_n (toString x) */(func (updateMap pst map org x (makeNewNode x org dest)) org (changeMap map org x (makeNewNode x org dest) ) xs closedList dest) 
 = func pst org map xs closedList dest 
+
+
+makePath :: (*PSt AState) NodeA -> (*PSt AState)
+makePath pst=:{ls=lst,io=ioState} x
+#indexAux = ((x.parentX-1)  + ((x.parentY-1))* TILE_AMOUNT )  - (2 * (x.parentY-1)) 
+#index =trace_n (toString indexAux) indexAux
+|x.nodeX == lst.startPoint.x && x.nodeY == lst.startPoint.y = abort "you win" 
+= makePath {pst & io = appWindowPicture (lst.windowId) (hiliteAt {x=x.nodeX * TILE_SIZE,y=x.nodeY * TILE_SIZE} {box_w=TILE_SIZE ,box_h=TILE_SIZE }) ioState } lst.map.[index]
 
 updateMap :: (*PSt AState) {NodeA} NodeA NodeA (Real,Real,Real)  -> (*PSt AState)
 updateMap pst=:{ls=lst,io} map x nodetoChange news=:(newG, newH, newF) 
@@ -250,7 +285,7 @@ where
 		updateStartPoint x y list
 		# index = ((x-1)  + ((y-1))* TILE_AMOUNT )  - (2 * (y-1))
 		= trace_n (toString index ){(\a b | b == index = {nodeX = x, nodeY = y, parentX = x, parentY = y, gCost = 0.0, hCost = 0.0, fCost = 0.0, isObstacle = False} = a)a b \\ a<-:list & b<-[0..]}
-	
+		
 		drawStartPoint :: Int Int *Picture -> *Picture
 		drawStartPoint xCord yCord pic 
 		#pic = setPenColour Yellow pic
@@ -271,6 +306,12 @@ where
 
 		quit:: (.ls, *PSt .l) -> (.ls, *PSt .l)
 		quit (local, pst) = (local, closeProcess pst)
+
 		drawStuff:: (*PSt AState) -> ( *PSt AState)
 		drawStuff pst=:{ls=lst,io=ios} 
+		# index = ((lst.startPoint.x-1)  + ((lst.startPoint.y-1))* TILE_AMOUNT )  - (2 * (lst.startPoint.y-1))
+		# newMap = dFS lst.map lst.map.[index] 0
+		# drawnMap = map (\(a,b) = appWindowPicture (lst.windowId) (drawBlackDot a b)) [(a.nodeX,a.nodeY) \\ a<-: newMap | a.isObstacle ]
+		# newIo =(seq drawnMap ios)
 		= aStar pst //{pst & ls = {lst & map = newMap}, io = newIo }//  /*trace_n (toString lst.map )*/ aStar pst 
+
