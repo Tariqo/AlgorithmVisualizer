@@ -1,11 +1,14 @@
-Version: 1.4
+Version: 1.5
 Global
 	ProjectRoot:	.
 	Target:	Object IO
 	Exec:	{Project}\window.exe
+	ByteCode:	
 	CodeGen
 		CheckStacks:	False
 		CheckIndexes:	True
+		OptimiseABC:	False
+		GenerateByteCode:	False
 	Application
 		HeapSize:	2097152000
 		StackSize:	5120000
@@ -22,6 +25,7 @@ Global
 			Memory:	False
 			MemoryMinimumHeapSize:	0
 			Time:	False
+			Callgraph:	False
 			Stack:	False
 			Dynamics:	False
 			GenericFusion:	False
@@ -40,13 +44,11 @@ Global
 		ResourceSource:	
 		GenerateDLL:	False
 		ExportedNames:	
+		StripByteCode:	True
+		KeepByteCodeSymbols:	True
+		PrelinkByteCode:	False
 	Paths
 		Path:	{Project}
-	OtherPaths
-		Path:	{Application}*Libraries*ObjectIO
-		Path:	{Application}*Libraries*ObjectIO*OS Windows
-		Path:	{Application}*Libraries*StdEnv
-		Path:	{Application}*Libraries*StdLib
 	Precompile:	
 	Postlink:	
 MainModule
@@ -63,2385 +65,2243 @@ MainModule
 		ReadableABC:	False
 		ReuseUniqueNodes:	True
 		Fusion:	False
-OtherModules
-	Module
-		Name:	StdBitmap
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdClipboard
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdControl
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdControlAttribute
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdControlClass
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdControlDef
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdControlReceiver
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdFileSelect
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdIO
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdIOBasic
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdIOCommon
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdId
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdKey
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdMenu
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdMenuAttribute
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdMenuDef
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdMenuElement
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdMenuElementClass
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdMenuReceiver
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdPSt
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdPStClass
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdPicture
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdPictureDef
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdPrint
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdPrintText
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdProcess
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdProcessAttribute
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdProcessDef
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdReceiver
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdReceiverAttribute
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdReceiverDef
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdSystem
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdTime
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdTimer
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdTimerAttribute
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdTimerDef
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdTimerElementClass
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdTimerReceiver
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdWindow
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdWindowAttribute
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdWindowDef
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	cast
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	commondef
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	controlaccess
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	controlcreate
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	controldraw
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	controlinternal
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	controllayout
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	controlpos
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	controlrelayout
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	controlresize
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	controlvalidate
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	device
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	deviceevents
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	devicefunctions
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	devicesystemstate
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	id
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	iostate
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	keyfocus
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	layout
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	menuaccess
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	menucreate
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	menudefaccess
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	menudevice
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	menuhandle
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	menuinternal
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	menuitems
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	mstate
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	processdevice
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	processhandle
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	processstack
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	receiveraccess
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	receiverdefaccess
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	receiverdevice
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	receiverhandle
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	receiverid
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	receivermessage
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	receivertable
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	relayout
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	roundrobin
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	scheduler
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	sdisize
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	semidynamic
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	systemid
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	timeraccess
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	timerdefaccess
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	timerdevice
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	timerhandle
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	timertable
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	toolbar
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	windowaccess
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	windowclipstate
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	windowcontrols
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	windowcreate
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	windowdevice
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	windowdispose
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	windowdraw
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	windowhandle
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	windowupdate
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	windowvalidate
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	world
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	wstate
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	wstateaccess
-		Dir:	{Application}*Libraries*ObjectIO
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	clCCall_12
+ProjectModules
+	DirModules
+		Dir:	{Application}*Libraries*ObjectIO
+		Modules
+			Module
+				Name:	StdBitmap
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdClipboard
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdControl
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdControlAttribute
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdControlClass
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdControlDef
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdControlReceiver
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdFileSelect
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdIO
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdIOBasic
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdIOCommon
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdId
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdKey
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdMenu
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdMenuAttribute
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdMenuDef
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdMenuElement
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdMenuElementClass
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdMenuReceiver
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdPSt
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdPStClass
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdPicture
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdPictureDef
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdPrint
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdPrintText
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdProcess
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdProcessAttribute
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdProcessDef
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdReceiver
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdReceiverAttribute
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdReceiverDef
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdSystem
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdTime
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdTimer
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdTimerAttribute
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdTimerDef
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdTimerElementClass
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdTimerReceiver
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdWindow
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdWindowAttribute
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdWindowDef
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	cast
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	commondef
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	controlaccess
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	controlcreate
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	controldraw
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	controlinternal
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	controllayout
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	controlpos
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	controlrelayout
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	controlresize
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	controlvalidate
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	device
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	deviceevents
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	devicefunctions
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	devicesystemstate
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	id
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	iostate
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	keyfocus
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	layout
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	menuaccess
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	menucreate
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	menudefaccess
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	menudevice
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	menuhandle
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	menuinternal
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	menuitems
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	mstate
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	processdevice
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	processhandle
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	processstack
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	receiveraccess
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	receiverdefaccess
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	receiverdevice
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	receiverhandle
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	receiverid
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	receivermessage
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	receivertable
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	relayout
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	roundrobin
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	scheduler
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	sdisize
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	semidynamic
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	systemid
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	timeraccess
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	timerdefaccess
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	timerdevice
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	timerhandle
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	timertable
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	toolbar
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	windowaccess
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	windowclipstate
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	windowcontrols
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	windowcreate
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	windowdevice
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	windowdispose
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	windowdraw
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	windowhandle
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	windowupdate
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	windowvalidate
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	world
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	wstate
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	wstateaccess
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+	DirModules
 		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-		NeededObjFiles
-			ObjectFile:	util_121.
-			ObjectFile:	cpicture_121.
-			ObjectFile:	cdebug_121.
-			ObjectFile:	cCrossCall_121.
-			ObjectFile:	cCrossCallWindows_121.
-			ObjectFile:	cCCallWindows_121.
-			ObjectFile:	cCCallSystem_121.
-	Module
-		Name:	clCrossCall_12
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-		NeededObjFiles
-			ObjectFile:	cCrossCallWindows_121.
-			ObjectFile:	cCrossCallProcedureTable_121.
-			ObjectFile:	cCrossCallCursor_121.
-			ObjectFile:	cCrossCall_121.
-			ObjectFile:	cCCallSystem_121.
-			ObjectFile:	cCCallWindows_121.
-			ObjectFile:	cAcceleratorTable_121.
-		NeededLibraries
-			Library:	userExt_library
-			Library:	gdiExt_library
-			Library:	kernelExt_library
-			Library:	winspool_library
-			Library:	winmm_library
-			Library:	shell32_library
-			Library:	ole32_library
-			Library:	kernel32_library
-			Library:	comctl32_library
-			Library:	advapi32_library
-	Module
-		Name:	clipboardCrossCall_12
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-		NeededObjFiles
-			ObjectFile:	cCrossCallClipboard_121.
-	Module
-		Name:	menuCCall_12
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-		NeededObjFiles
-			ObjectFile:	cCrossCallMenus_121.
-	Module
-		Name:	menuCrossCall_12
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	menuevent
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	menuwindowmenu
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	osactivaterequests
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	osbeep
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	osbitmap
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	osclipboard
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	osdocumentinterface
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-		NeededObjFiles
-			ObjectFile:	cCrossCallxDI_121.
-	Module
-		Name:	osevent
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	osfileselect
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-		NeededObjFiles
-			ObjectFile:	cCrossCallFileSelectors_121.
-	Module
-		Name:	osfont
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	osguishare
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	oskey
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	osmenu
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	osmouse
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	ospicture
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	osprint
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-		NeededObjFiles
-			ObjectFile:	cprinter_121.
-			ObjectFile:	cCrossCallPrinter_121.
-	Module
-		Name:	osrgn
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	ossystem
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	ostick
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	ostime
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	ostoolbar
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	ostoolbox
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-		NeededObjFiles
-			ObjectFile:	cCrossCallFont_121.
-	Module
-		Name:	ostooltip
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	ostypes
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	oswindow
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	pictCCall_12
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	processevent
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	receiverevent
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	rgnCCall_12
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	timerevent
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	windowCCall_12
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-		NeededObjFiles
-			ObjectFile:	cpicture_121.
-			ObjectFile:	cCCallWindows_121.
-	Module
-		Name:	windowCrossCall_12
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	windowevent
-		Dir:	{Application}*Libraries*ObjectIO*OS Windows
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdArray
+		Modules
+			Module
+				Name:	clCCall_12
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+				NeededObjFiles
+					ObjectFile:	util_121.
+					ObjectFile:	cpicture_121.
+					ObjectFile:	cdebug_121.
+					ObjectFile:	cCrossCall_121.
+					ObjectFile:	cCrossCallWindows_121.
+					ObjectFile:	cCCallWindows_121.
+					ObjectFile:	cCCallSystem_121.
+			Module
+				Name:	clCrossCall_12
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+				NeededObjFiles
+					ObjectFile:	cCrossCallWindows_121.
+					ObjectFile:	cCrossCallProcedureTable_121.
+					ObjectFile:	cCrossCallCursor_121.
+					ObjectFile:	cCrossCall_121.
+					ObjectFile:	cCCallSystem_121.
+					ObjectFile:	cCCallWindows_121.
+					ObjectFile:	cAcceleratorTable_121.
+				NeededLibraries
+					Library:	userExt_library
+					Library:	gdiExt_library
+					Library:	kernelExt_library
+					Library:	winspool_library
+					Library:	winmm_library
+					Library:	shell32_library
+					Library:	ole32_library
+					Library:	kernel32_library
+					Library:	comctl32_library
+					Library:	advapi32_library
+			Module
+				Name:	clipboardCrossCall_12
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+				NeededObjFiles
+					ObjectFile:	cCrossCallClipboard_121.
+			Module
+				Name:	menuCCall_12
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+				NeededObjFiles
+					ObjectFile:	cCrossCallMenus_121.
+			Module
+				Name:	menuCrossCall_12
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	menuevent
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	menuwindowmenu
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	osactivaterequests
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	osbeep
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	osbitmap
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	osclipboard
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	osdocumentinterface
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+				NeededObjFiles
+					ObjectFile:	cCrossCallxDI_121.
+			Module
+				Name:	osevent
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	osfileselect
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+				NeededObjFiles
+					ObjectFile:	cCrossCallFileSelectors_121.
+			Module
+				Name:	osfont
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	osguishare
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	oskey
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	osmenu
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	osmouse
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	ospicture
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	osprint
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+				NeededObjFiles
+					ObjectFile:	cprinter_121.
+					ObjectFile:	cCrossCallPrinter_121.
+			Module
+				Name:	osrgn
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	ossystem
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	ostick
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	ostime
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	ostoolbar
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	ostoolbox
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+				NeededObjFiles
+					ObjectFile:	cCrossCallFont_121.
+			Module
+				Name:	ostooltip
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	ostypes
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	oswindow
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	pictCCall_12
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	processevent
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	receiverevent
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	rgnCCall_12
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	timerevent
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	windowCCall_12
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+				NeededObjFiles
+					ObjectFile:	cpicture_121.
+					ObjectFile:	cCCallWindows_121.
+			Module
+				Name:	windowCrossCall_12
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	windowevent
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+	DirModules
 		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdBool
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdChar
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdCharList
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdClass
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdDebug
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdEnum
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdEnv
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdFile
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdFunc
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdFunctions
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdInt
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdList
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdMaybe
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdMisc
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdOrdList
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdOverloaded
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdReal
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdStrictLists
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdString
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdTuple
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	_SystemArray
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	_SystemEnum
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	_SystemEnumStrict
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	_SystemStrictLists
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdLibMisc
+		Modules
+			Module
+				Name:	StdArray
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdBool
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdChar
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdCharList
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdClass
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdDebug
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdEnum
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdEnv
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdFile
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdFunc
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdFunctions
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdInt
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdList
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdMaybe
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdMisc
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdOrdList
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdOverloaded
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdReal
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdStrictLists
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdString
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	StdTuple
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	_SystemArray
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	_SystemEnum
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	_SystemEnumStrict
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	_SystemStrictLists
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+			Module
+				Name:	_SystemStrictMaybes
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False
+	DirModules
 		Dir:	{Application}*Libraries*StdLib
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
+		Modules
+			Module
+				Name:	StdLibMisc
+				Compiler
+					NeverMemoryProfile:	False
+					NeverTimeProfile:	False
+					StrictnessAnalysis:	True
+					ListTypes:	StrictExportTypes
+					ListAttributes:	True
+					Warnings:	True
+					Verbose:	True
+					ReadableABC:	False
+					ReuseUniqueNodes:	True
+					Fusion:	False

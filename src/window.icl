@@ -168,8 +168,8 @@ checkNeighbors node pst=:{ls=lst, io}
 	}
 
 ///constants
-TILE_AMOUNT :== 60 // The amount of tiles that will be drawable on
-TILE_SIZE :==10  //Size of the drawable tiles
+TILE_AMOUNT :== 50 // The amount of tiles that will be drawable on
+TILE_SIZE :==15  //Size of the drawable tiles
 
 
 Start:: *World -> *World
