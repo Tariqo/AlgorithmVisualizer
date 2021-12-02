@@ -20,6 +20,10 @@ TILE_SIZE  :==16 //Size of the drawable tiles
 	
 
 
+instance < NodeA
+where
+	(<) a b = a.number < b.number
+
 drawRect :: NodeA *Picture -> *Picture
 drawRect node pic 
 #pic = setPenColour Black pic
@@ -40,6 +44,22 @@ drowStartPoints  map pic
 =  foldr (\x y = drawRect x y) pic [a \\ a<-:map] 
 
 
+drawColoredRect :: NodeA *Picture -> *Picture
+drawColoredRect node pic 
+#pic = setPenColour Black pic
+#pic = fillAt {x =toInt (node.nodeY*(toReal TILE_SIZE)) , y=toInt ((node.nodeX + 1.0)* (toReal TILE_SIZE) )} {box_w = TILE_SIZE  , box_h = ~( TILE_SIZE * 50) } pic 
+#pic = setPenColour Red pic
+#pic = drawAt {x =(toInt (node.nodeY)*TILE_SIZE) , y= (toInt(node.nodeX+1.0)*TILE_SIZE ) } (toString node.number) pic 
+#pic = setPenColour (RGB {r=0,g=255,b=255}) pic
+= fillAt {x =toInt (node.nodeY*(toReal TILE_SIZE)) , y= toInt (node.nodeX*(toReal TILE_SIZE) )} {box_w = TILE_SIZE,box_h= ~ ( TILE_SIZE * node.height) } pic 
+	
+
+
+drawBoard :: (*PSt SState) -> (*PSt SState)
+drawBoard pst 
+# newPst=:{ls = lst, io} = resetSwapped pst
+# newIo = appWindowPicture (lst.windowId) (drowStartPoints lst.map) io
+= {newPst & io = newIo}
 
 
 animateSwap :: (*PSt SState) Int Int -> (*PSt SState)
@@ -114,6 +134,44 @@ selectionSortAux pst=:{ls=lst,io} x y size
 | lst.map.[x].number > lst.map.[y].number = selectionSortAux pst x (y+1) size
 = selectionSortAux pst y (y+1) size
 
+sortPart :: {NodeA} (Int,Int) -> {NodeA}
+sortPart map2 (a,b) = {x \\ x<-returnMap}
+where
+	mapList = [x \\ x <-:map2]
+	sorted = ((wait 100) o sort) [map2.[x] \\ x<-[a..b]]
+	returnMap = [x \\ x<-mapList & y <-[0..] | y < a] ++ sorted ++ [x \\ x<-mapList & y <-[0..] | y > b]
+
+drawSortedPart :: (Int,Int) (*PSt SState) -> (*PSt SState) 
+drawSortedPart (a,b) pst=:{ls=lst,io}
+#halfSortedMap = sortPart lst.map (a,b)
+#updatedMap = {{halfSortedMap.[x] & nodeX = lst.map.[x].nodeX, nodeY = lst.map.[x].nodeY , isSwapped = True} \\ x<-[0..(size lst.map)-1]}
+#drawingFuncs = map (\x = ((wait 10) o x)) [appWindowPicture (lst.windowId) (drawColoredRect ( updatedMap.[x])) \\ x<-[a..b]]
+#newIo = seq drawingFuncs io
+=  {pst & ls = {lst & map = updatedMap}  , io = newIo}
+
+mergeSort :: (*PSt SState) -> (*PSt SState)
+mergeSort pst=:{ls=lst,io} 
+# unsortedInteverals = mSort lst.map 0 (size(lst.map)-1)
+# mergeInteverals = filter (\(a,b) = a <> b) unsortedInteverals
+= drawBoard ( foldl (\ourPst newElem = (drawSortedPart newElem ourPst) ) pst mergeInteverals )
+
+mSort :: {NodeA} Int Int ->  [(Int,Int)]
+mSort map x y 
+| x==y  = [(x,x)]
+# q = (x  + y ) / 2 
+= (merge map (mSort map x q) (mSort map (q+1) y))
+
+merge :: {NodeA} [(Int,Int)] [(Int,Int)] -> [(Int,Int)] 
+merge map2 [] ys = ys
+merge map2 xs [] = xs
+merge map2 p=:[x:xs] q=:[y:ys] = p  ++ q ++  [((fst o hd) p,(snd o last) q)] 
+
+
+resetSwapped :: (*PSt SState) -> (*PSt SState) 
+resetSwapped pst=:{ls=lst,io}= {pst & ls = {lst& map = { {x & isSwapped = False} \\ x<-:lst.map}}} 
+
+
+
 indexOf  :: Real {Real} -> Int 
 indexOf n  array = hd [i \\ i <- [0..(size array)] | n == (sort ([x \\ x <-: array]))!!i ] 
 		
@@ -183,7 +241,7 @@ where
 				
 		handlingMouseEvent :: MouseState (.ls, *PSt SState) -> (.ls,*PSt SState)
 		handlingMouseEvent (MouseDown hitPoint  _ _) (pst=:(nil, {ls=lst, io=ioState}))
-		= (nil, (insertionSort (snd pst)) )
+		= (nil, (mergeSort (snd pst)) )
 		
 		handlingMouseEvent  _  (pst=:(nil,{ls=lst, io=ioState}))
 		# pst1 = (nil, {ls=lst, io=( appWindowPicture (lst.windowId) (drowStartPoints lst.map) ioState)  })
