@@ -7,11 +7,11 @@ Global
 		CheckStacks:	False
 		CheckIndexes:	True
 	Application
-		HeapSize:	2097152000
-		StackSize:	5120000
+		HeapSize:	209715200
+		StackSize:	10485760
 		ExtraMemory:	81920
-		IntialHeapSize:	2048000
-		HeapSizeMultiplier:	25600
+		IntialHeapSize:	204800
+		HeapSizeMultiplier:	4096
 		ShowExecutionTime:	False
 		ShowGC:	False
 		ShowStackSize:	False
@@ -65,6 +65,20 @@ MainModule
 		Fusion:	False
 OtherModules
 	Module
+		Name:	Util.Astar
+		Dir:	{Project}
+		Compiler
+			NeverMemoryProfile:	False
+			NeverTimeProfile:	False
+			StrictnessAnalysis:	True
+			ListTypes:	StrictExportTypes
+			ListAttributes:	True
+			Warnings:	True
+			Verbose:	True
+			ReadableABC:	False
+			ReuseUniqueNodes:	True
+			Fusion:	False
+	Module
 		Name:	Util.Constants
 		Dir:	{Project}
 		Compiler
@@ -79,7 +93,21 @@ OtherModules
 			ReuseUniqueNodes:	True
 			Fusion:	False
 	Module
-		Name:	Util.Funcs
+		Name:	Util.Dfs
+		Dir:	{Project}
+		Compiler
+			NeverMemoryProfile:	False
+			NeverTimeProfile:	False
+			StrictnessAnalysis:	True
+			ListTypes:	StrictExportTypes
+			ListAttributes:	True
+			Warnings:	True
+			Verbose:	True
+			ReadableABC:	False
+			ReuseUniqueNodes:	True
+			Fusion:	False
+	Module
+		Name:	Util.Rendering
 		Dir:	{Project}
 		Compiler
 			NeverMemoryProfile:	False

@@ -1,13 +1,18 @@
 module window
-import StdEnv, StdIO, StdFunc, StdDebug ///StdFunc contains seq, StdDebug contains trace_n
-import Util.Funcs, Util.Constants
+
+
+import StdEnv, StdIO, StdFunc, StdDebug, ostime ///StdFunc contains seq, StdDebug contains trace_n
+import Util.Constants , Util.Rendering, Util.Astar,  Util.Dfs
+
 
 Start:: *World -> *World
 Start world 
-	#(wid ,world1) = openId world
+	#(toll, world1) = worldGetToolbox world
+	#((hrs,mins,secs), newtoll) = osGetCurrentTime toll
+	#(wid ,world2) = openId world1
 	#as = {
 			windowId = wid,
-			map = {{nodeX=yCord, nodeY=xCord, parentX=(-1), parentY=(-1), gCost=100000000.0, fCost=100000000.0, hCost=100000000.0, isObstacle=False}
+			map = {{nodeX=yCord, nodeY=xCord, parentX=(-1), parentY=(-1), gCost=100000000.0, fCost=100000000.0, hCost=100000000.0, isObstacle=False, visited = False}
 						 \\ xCord <-[1..TILE_AMOUNT-2], yCord <-[1..TILE_AMOUNT-2]},
 			startPointDrawn = False,
 			endPointDrawn = False,
@@ -15,10 +20,12 @@ Start world
 			startPoint = {x = (-1), y =(-1)},
 			endPoint = {x = (-1), y =(-1)},
 			closedList = [False \\ xCord <-[1..TILE_AMOUNT-2], yCord <-[1..TILE_AMOUNT-2]],
-			openList = []
+			openList = [],
+			seed = (hrs,mins,secs),
+			secondNeighbors = []
 			}
 			
-	= startIO SDI as (initIO (wid)) [ProcessClose closeProcess] world1
+	= startIO SDI as (initIO (wid)) [ProcessClose closeProcess] world2
 where
 		/// _____________ Elements Gui initialization Area_____________
 				
@@ -26,8 +33,10 @@ where
 		where
 			openfilemenu = snd o openMenu undef file
 			file = Menu "&File"
-					(   MenuItem "&Start" [MenuShortKey 'R',MenuFunction (noLS drawStuff)] //should be algo function
+					(   MenuItem "&A * Pathfinding" [MenuShortKey 'R',MenuFunction (noLS aStarStart)]
+					:+: MenuItem "&DFS mazeGeneration" [MenuShortKey 'T',MenuFunction (noLS DFS)]
 					:+: MenuItem "&Quit" [MenuShortKey 'Q',MenuFunction (noLS closeProcess)]
+					
 					) []
 			openwindow = snd o openWindow undef window
 			window = Window "Algorithm Visulizer" NilLS
@@ -114,7 +123,7 @@ where
 		updateStartPoint :: Int Int {NodeA} -> {NodeA}
 		updateStartPoint x y list
 		# index = ((x-1)  + ((y-1))* TILE_AMOUNT )  - (2 * (y-1))
-		= trace_n (toString index ){(\a b | b == index = {nodeX = x, nodeY = y, parentX = x, parentY = y, gCost = 0.0, hCost = 0.0, fCost = 0.0, isObstacle = False} = a)a b \\ a<-:list & b<-[0..]}
+		= trace_n (toString index ){(\a b | b == index = {nodeX = x, nodeY = y, parentX = x, parentY = y, gCost = 0.0, hCost = 0.0, fCost = 0.0, isObstacle = False, visited = False} = a)a b \\ a<-:list & b<-[0..]}
 		
 		drawStartPoint :: Int Int *Picture -> *Picture
 		drawStartPoint xCord yCord pic 
@@ -137,10 +146,15 @@ where
 		quit:: (.ls, *PSt .l) -> (.ls, *PSt .l)
 		quit (local, pst) = (local, closeProcess pst)
 
-		drawStuff:: (*PSt AState) -> ( *PSt AState)
-		drawStuff pst=:{ls=lst,io=ios} 
+		DFS:: (*PSt AState) -> ( *PSt AState)
+		DFS pst=:{ls=lst,io=ios} 
 		# index = ((lst.startPoint.x-1)  + ((lst.startPoint.y-1))* TILE_AMOUNT )  - (2 * (lst.startPoint.y-1))
-		# newMap = dFS lst.map lst.map.[index] 0
-		# drawnMap = map (\(a,b) = appWindowPicture (lst.windowId) (drawBlackDot a b)) [(a.nodeX,a.nodeY) \\ a<-: newMap | a.isObstacle ]
-		# newIo =(seq drawnMap ios)
-		= aStar pst //{pst & ls = {lst & map = newMap}, io = newIo }//  /*trace_n (toString lst.map )*/ aStar pst 
+		# dfsMap =  {(\x |x.nodeX == lst.startPoint.x && x.nodeY == lst.startPoint.y = x  = {x & isObstacle = True} ) a \\ a <-: lst.map}
+		# newIo = seq (map (\(a,b) = appWindowPicture (lst.windowId) (drawBlackDot a b))[(a.nodeX,a.nodeY) \\ a<-: dfsMap | a.isObstacle]) ios
+		# (newPst=:{ls=lst2,io=testIO}) = (dfs {pst & ls = {lst & map = dfsMap }, io = newIo } dfsMap.[index] lst.seed)
+		# aStartMap = {(\x |x.nodeX == lst2.startPoint.x && x.nodeY == lst2.startPoint.y = {x & isObstacle = False}  = x  ) a \\ a <-: lst2.map}
+		# dfss = {newPst & ls = {lst2 & startPoint = {x=0,y=0}, endPoint = {x=49,y=49}, openList = lst2.openList ++ [aStartMap.[index]], map = aStartMap }/*, io = appWindowPicture (lst2.windowId) (drawEndPoint 49 49)testIO */}
+		= dfss
+		
+		aStarStart :: (*PSt AState) -> ( *PSt AState)
+		aStarStart pst = aStar pst
