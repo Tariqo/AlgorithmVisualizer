@@ -18,62 +18,29 @@ TILE_SIZE  :==16 //Size of the drawable tiles
 	map :: {NodeA}
 	}
 	
-drowStartPoints ::  {NodeA} *Picture ->  *Picture
-drowStartPoints  map pic  
+
+
+drawRect :: NodeA *Picture -> *Picture
+drawRect node pic 
 #pic = setPenColour Black pic
-#pic = fillAt {x=0,y=0} {box_w = TILE_AMOUNT*TILE_SIZE*2, box_h = (TILE_AMOUNT*TILE_SIZE)} pic
-=  foldr (\x y = drawRect y x) pic [a \\ a<-:map] 
-
-
-bubbleSort :: (*PSt SState) -> (*PSt SState)
-bubbleSort {ls=lst,io} = bubbleSortAux {ls=lst,io} 0 1 (size (lst.map))
-
-bubbleSortAux :: (*PSt SState) Int Int Int -> (*PSt SState)
-bubbleSortAux pst _ _ 1 = pst
-bubbleSortAux pst=:{ls=lst,io} x y size
-| y == size = bubbleSortAux pst 0 1 (size-1)
-|lst.map.[x].number > lst.map.[y].number = bubbleSortAux (animateSwap pst x y) y (y+1) (size)
-= bubbleSortAux pst y (y+1) (size)
-
-mergeSort :: (*PSt SState) -> (*PSt SState)
-mergeSort pst=:{ls=lst,io} 
-# lista = mSort lst.map 0 (size(lst.map)-1)
-|[a.number \\ a<-:lst.map] ==  (sort [a.number \\ a<-:lst.map]) = pst 
-= mergeSort (foldr (\ newElem ourPst= animateSwap ourPst (fst newElem)(snd newElem)) pst lista) //seq (map (\x = animateSwap pst (fst x)(snd x)) lista) pst 
-
-ceil :: Int Int -> Int
-ceil a b = toInt (((toReal a) + (toReal b))  / 2.0+0.5 )
-
-mSort :: {NodeA} Int Int ->  [(Int,Int)] //[(Int,Int)]
-mSort map x y 
-| x==y  = trace_n ("x="+++toString x +++ ", y=" +++ toString y) [(x,x)]
-# q = (x  + y ) / 2 
-= trace_n ("x="+++toString x +++ ", y=" +++ toString y) (merge map (mSort map x q) (mSort map (q+1) y))
-
-shouldSwap :: {NodeA} Int Int -> (Int,Int) 
-shouldSwap map x y 
-|map.[x].number > map.[y].number = (x,y)
-= (x,x)
-
-merge :: {NodeA} [(Int,Int)] [(Int,Int)] -> [(Int,Int)] 
-merge map [] ys = ys
-merge map xs [] = xs
-merge map p=:[x:xs] q=:[y:ys]
-| map.[snd x].number <= map.[snd y].number = [x: merge map xs q]
-| otherwise = [(snd x, snd y) : merge map p ys]
-	
-drawRect :: *Picture NodeA -> *Picture
-drawRect pic node 
+#pic = fillAt {x =toInt (node.nodeY*(toReal TILE_SIZE)) , y=toInt (node.nodeX* (toReal TILE_SIZE) )} {box_w = TILE_SIZE  , box_h = ~( TILE_SIZE * 50) } pic 
 #pic = setPenColour Red pic
 #pic = drawAt {x =(toInt (node.nodeY)*TILE_SIZE) , y= (toInt(node.nodeX+1.0)*TILE_SIZE ) } (toString node.number) pic 
 |node.isSwapped = (hiliteAt {x = toInt (node.nodeY*(toReal TILE_SIZE)) , y= toInt (node.nodeX*(toReal TILE_SIZE) )} {box_w = TILE_SIZE  , box_h = ~( TILE_SIZE * node.height)} o
  fillAt {x =toInt (node.nodeY*(toReal TILE_SIZE)) , y= toInt (node.nodeX*(toReal TILE_SIZE) )} {box_w = TILE_SIZE,box_h= ~ ( TILE_SIZE * node.height) }) pic 
-= //trace_n ("Number: "+++ toString node.number +++", x= " +++ toString node.nodeX +++ ", y=" +++ toString node.nodeY +++ ", height= " +++ toString (  indexOf  node.number  mainArr) )
-	fillAt {x =toInt (node.nodeY*(toReal TILE_SIZE)) , y=toInt (node.nodeX* (toReal TILE_SIZE) )} {box_w = TILE_SIZE  , box_h = ~( TILE_SIZE * node.height) } pic
-		
-veryImportantFunction :: Int -> Int
-veryImportantFunction 10000 = 0
-veryImportantFunction x = trace_n "5\n" (1 + veryImportantFunction (x + 1 ))
+=fillAt {x =toInt (node.nodeY*(toReal TILE_SIZE)) , y=toInt (node.nodeX* (toReal TILE_SIZE) )} {box_w = TILE_SIZE  , box_h = ~( TILE_SIZE * node.height) } pic
+
+
+
+	
+drowStartPoints ::  {NodeA} *Picture ->  *Picture
+drowStartPoints  map pic  
+#pic = setPenColour Black pic
+#pic = fillAt {x=0,y=0} {box_w = TILE_AMOUNT*TILE_SIZE*2, box_h = (TILE_AMOUNT*TILE_SIZE)} pic
+=  foldr (\x y = drawRect x y) pic [a \\ a<-:map] 
+
+
+
 
 animateSwap :: (*PSt SState) Int Int -> (*PSt SState)
 animateSwap pst=:{ls=lst} x y
@@ -85,22 +52,12 @@ animateSwap pst=:{ls=lst} x y
 #bDestY = a.nodeY 
 =  animateSwapAux pst x y aDestX aDestY bDestX bDestY
 
-floor :: Real -> Real
-floor num = toReal (foldl (\x y = x +++ toString y )"" (takeWhile ((<>)'.')[a \\ a<-:(toString num)]))
-
-myAbs :: Real -> Real
-myAbs x
-| x> 0.0 = x
-= 0.0 - x
 
 animateSwapAux :: (*PSt SState) Int Int Real Real Real Real -> (*PSt SState)
 animateSwapAux pst=:{ls=lst,io} x y aDestX aDestY bDestX bDestY
-|myAbs( lst.map.[x].nodeX - aDestX) < 0.1 && myAbs ( lst.map.[x].nodeY -  aDestY)  < 0.1 && myAbs (lst.map.[y].nodeX - bDestX) < 0.1 && myAbs(lst.map.[y].nodeY - bDestY) < 0.1 = {pst& ls = {lst & map =swap lst.map x y }} 
+|abs( lst.map.[x].nodeX - aDestX) < 0.1 && abs ( lst.map.[x].nodeY -  aDestY)  < 0.1 && abs (lst.map.[y].nodeX - bDestX) < 0.1 && abs(lst.map.[y].nodeY - bDestY) < 0.1 = {pst& ls = {lst & map =swap lst.map x y }} 
 # newMap = swapTwo x y aDestY bDestY lst.map
-# newio = enableTimer lst.timerId io 
-# newio = setTimerInterval lst.timerId (500 * 60 * ticksPerSecond) newio
-= //trace_n (toString )
-	wait 1 (animateSwapAux {pst& ls = {lst & map =newMap }, io = appWindowPicture (lst.windowId) (drowStartPoints newMap) newio  } x y aDestX aDestY bDestX bDestY)
+= wait 2 (animateSwapAux {pst& ls = {lst & map =newMap }, io = appWindowPicture (lst.windowId) (drowStartPoints newMap) io  } x y aDestX aDestY bDestX bDestY)
 
 swapTwo :: Int Int Real Real {NodeA} -> {NodeA}
 swapTwo x y aDestY bDestY arr 
@@ -111,8 +68,7 @@ swapTwo x y aDestY bDestY arr
 #newX = case x < y of
 		True = {arr.[x] & nodeX = arr.[x].nodeX , nodeY = arr.[x].nodeY + 0.1, isSwapped = True}
 		False = {arr.[x] & nodeX = arr.[x].nodeX , nodeY = arr.[x].nodeY - 0.1, isSwapped = True}
-= //trace_n(foldr (+++) "" ["aaaa\n"\\ a<- [1..15]])
-  {(\b | b == y = newY = if (b == x) newX a) c \\ a<-:arr& c<-[0..]}
+= {(\b | b == y = newY = if (b == x) newX a) c \\ a<-:arr& c<-[0..]}
 
 swap :: {NodeA} Int Int -> {NodeA}
 swap arr x y
@@ -121,16 +77,27 @@ swap arr x y
 #newX = {arr.[x] & nodeX = newXCord, nodeY = newYCord, isSwapped = False} 
 ={(\b | b == x = {arr.[y]& isSwapped = False} = if (b == y) {arr.[x]& isSwapped = False} a) c \\ a<-:arr& c<-[0..]}
 
-indexOf  :: Real {Real} -> Int 
-indexOf n  array = hd [i \\ i <- [0..(size array)] | n == (sort ([x \\ x <-: array]))!!i ] 
-		
-mainArr :: {Int}
-mainArr = {x \\ x<- [60,59..40] } //{x \\ x<-  [-4,-15,10,3,25,12,18,6,20000,1000, 156 , 16 , 111 , 122, 125] } 
-//mainArr = {40,56,54,43,44,52,51,60,47,48,41,55,53,50,49}
-// //{x \\ x<- [60,59..40] }
 
+insertionSort :: (*PSt SState) -> (*PSt SState)
+insertionSort {ls=lst,io} = insertionSortAux {ls=lst,io} 0 1 (size (lst.map))
 
-	
+insertionSortAux :: (*PSt SState) Int Int Int -> (*PSt SState)
+insertionSortAux pst=:{ls=lst,io} b a size 
+| a == size = pst
+| b == -1 = insertionSortAux pst a (a+1) size
+|lst.map.[a].number < lst.map.[b].number = insertionSortAux (animateSwap pst a b) b b  size
+= (insertionSortAux pst (b-1) a size)
+
+bubbleSort :: (*PSt SState) -> (*PSt SState)
+bubbleSort {ls=lst,io} = bubbleSortAux {ls=lst,io} 0 1 (size (lst.map))
+
+bubbleSortAux :: (*PSt SState) Int Int Int -> (*PSt SState)
+bubbleSortAux pst _ _ 1 = pst
+bubbleSortAux pst=:{ls=lst,io} x y size
+| y == size = bubbleSortAux pst 0 1 (size-1)
+|lst.map.[x].number > lst.map.[y].number = bubbleSortAux (animateSwap pst x y) y (y+1) (size)
+= bubbleSortAux pst y (y+1) (size)
+
 selectionSort :: (*PSt SState) -> (*PSt SState)
 selectionSort {ls=lst,io} = slAuxAux {ls=lst,io} 0 1 (size (lst.map))
 
@@ -146,6 +113,15 @@ selectionSortAux pst=:{ls=lst,io} x y size
 | y == (size-1) = pst
 | lst.map.[x].number > lst.map.[y].number = selectionSortAux pst x (y+1) size
 = selectionSortAux pst y (y+1) size
+
+indexOf  :: Real {Real} -> Int 
+indexOf n  array = hd [i \\ i <- [0..(size array)] | n == (sort ([x \\ x <-: array]))!!i ] 
+		
+mainArr :: {Int}
+mainArr = {x \\ x<- [60,59..40] }
+
+//{x \\ x<-  [-4,-15,10,3,25,12,18,6,20000,1000, 156 , 16 , 111 , 122, 125] } 
+
 
 
 Start:: *World -> *World
@@ -163,10 +139,8 @@ where
 		initIO (wid,timerID)  = openwindow o openfilemenu o opentimer
 		where
 			openfilemenu = snd o openMenu undef file
-			file = Menu "&Option"
+			file = Menu "&File"
 					(   MenuItem "&Start" [MenuShortKey 'R',MenuFunction (noLS  closeProcess)] //should be the sorting algorthim
-					:+: MenuItem "&Selection Sort" [MenuShortKey 'S',MenuFunction (noLS selectionSort)]
-					:+: MenuItem "&Bubble Sort" [MenuShortKey 'B',MenuFunction (noLS bubbleSort)]
 					:+: MenuItem "&Quit" [MenuShortKey 'Q',MenuFunction (noLS closeProcess)]
 					) []
 			openwindow = snd o openWindow undef window
@@ -185,9 +159,8 @@ where
 				,	TimerFunction		(noLS1 (\_ x->x))
 				]				             	
 		paintFun :: SelectState UpdateState *Picture -> *Picture  //style 2 more suffecient.
-		paintFun _ _ pic = pic //paint_Border pic 
-														
-		/***/
+		paintFun _ _ pic = pic
+		
 		canvasPaint_Func :: *Picture -> *Picture
 		canvasPaint_Func pic
 		# rgbColour = Blue
@@ -205,18 +178,16 @@ where
 		# pic = paintGrid pic 
 		= pic 
 
-		//Start = indxOf 5 arr 
-
 		drowStartPoints2 :: (.ls, *PSt SState) -> (.ls, *PSt SState)
 		drowStartPoints2 (pst=:(nil,{ls=lst, io=ioState})) = (nil,{ls=lst,io = appWindowPicture (lst.windowId) (hiliteAt {x= 0 * TILE_SIZE,y=5 * TILE_SIZE} {box_w=15 ,box_h=TILE_SIZE *3  }) ioState } )  
 				
 		handlingMouseEvent :: MouseState (.ls, *PSt SState) -> (.ls,*PSt SState)
 		handlingMouseEvent (MouseDown hitPoint  _ _) (pst=:(nil, {ls=lst, io=ioState}))
-		= (nil, (bubbleSort (snd pst)) )// (nil,{(snd pst) & ls = {lst & map = animateSwap \ lst.map 0 5} }) 
+		= (nil, (insertionSort (snd pst)) )
 		
 		handlingMouseEvent  _  (pst=:(nil,{ls=lst, io=ioState}))
 		# pst1 = (nil, {ls=lst, io=( appWindowPicture (lst.windowId) (drowStartPoints lst.map) ioState)  })
-	//	# pst2 =  drowStartPoints2 pst1   
+		# pst2 =  drowStartPoints2 pst1   
 		=  pst1
 
 		paintGrid :: *Picture -> *Picture
