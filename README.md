@@ -9,7 +9,7 @@ Algorithm visualizer made with Clean, in a pure functional way.
 
 # How To Run:
 •	Open your terminal in a desired path and type in the following command:
-      git clone https://github.com/Tariqo/Clean-Chess-Application.git
+      git clone https://github.com/Tariqo/AlgorithmVisualizer.git
       
 •	Navigate around to the src/ directory
 
