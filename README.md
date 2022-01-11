@@ -21,4 +21,4 @@ Algorithm visualizer made with Clean, in a pure functional way.
 
 
 # Developers 
-Tariqo , OthmanAbdullah , KemoM77 , Baraa420 , longlegpenguin, AlShargabiEbrahim
+Tariqo , OthmanAbdullah , KemoM77 , Baraa420 , longlegpenguin, AlShargabiEbrahim || Ebo1d 
