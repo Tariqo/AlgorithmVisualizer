@@ -121,6 +121,28 @@ bubbleSortAux pst=:{ls=lst,io} x y size
 selectionSort :: (*PSt SState) -> (*PSt SState)
 selectionSort {ls=lst,io} = slAuxAux {ls=lst,io} 0 1 (size (lst.map))
 
+getMaxValue  :: [Int] -> Int
+getMaxValue list = maxList  list 
+getMaxInd :: {NodeA} Int -> Int
+getMaxInd map size = hd [ i \\ i <- [0..size] |  map.[i].number == (getMaxValue [a.number \\ a <-: map])]
+
+arrToList :: {NodeA} -> [NodeA]
+arrToList array = [a \\ a <-:array] 
+getSubArray2 ::{NodeA} Int Int -> {NodeA}
+getSubArray2 array i size = { (arrToList (array))!!i  \\ i <- [i..size] } 
+
+maxSelectionSort :: (*PSt SState) -> (*PSt SState)                  
+maxSelectionSort pst=:{ls=lst,io} = maxSelectionSortAux pst 0  ((size (lst.map)) - 1 ) 
+getSubArray ::{NodeA} Int -> {NodeA}
+getSubArray arr i = {a \\ a <-: arr & j <- [0..i]} 
+maxSelectionSortAux :: (*PSt SState) Int Int -> (*PSt SState) 
+maxSelectionSortAux pst _ 0 = pst
+maxSelectionSortAux pst=:{ls=lst,io} i size
+# maxInd = getMaxInd (getSubArray lst.map size) size  
+= maxSelectionSortAux (animateSwap pst maxInd size) 0 (size - 1)
+
+
+
 slAuxAux :: (*PSt SState) Int Int Int -> (*PSt SState)
 slAuxAux pst _ _ 1 = pst
 slAuxAux pst=:{ls=lst,io} x y size
