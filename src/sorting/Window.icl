@@ -118,9 +118,6 @@ bubbleSortAux pst=:{ls=lst,io} x y size
 |lst.map.[x].number > lst.map.[y].number = bubbleSortAux (animateSwap pst x y) y (y+1) (size)
 = bubbleSortAux pst y (y+1) (size)
 
-selectionSort :: (*PSt SState) -> (*PSt SState)
-selectionSort {ls=lst,io} = slAuxAux {ls=lst,io} 0 1 (size (lst.map))
-
 getMaxValue  :: [Int] -> Int
 getMaxValue list = maxList  list 
 getMaxInd :: {NodeA} Int -> Int
@@ -142,6 +139,25 @@ maxSelectionSortAux pst=:{ls=lst,io} i size
 = maxSelectionSortAux (animateSwap pst maxInd size) 0 (size - 1)
 
 
+
+getMinValue  :: Int Int [Int] -> Int
+getMinValue ind size list = minList [list!!i \\  i <- [ind..size] ]  
+getMinInd ::  {NodeA} Int Int -> Int
+getMinInd map  j size = hd [ i \\ i <- [j..size] |  map.[i].number == (getMinValue i size [a.number \\ a <-: map])]
+
+
+minSelectionSort :: (*PSt SState) -> (*PSt SState) 
+minSelectionSort pst=:{ls=lst,io} = minSelectionSortAux pst 0 ((size (lst.map)) - 1  )   
+minSelectionSortAux :: (*PSt SState) Int Int -> (*PSt SState)
+minSelectionSortAux pst=:{ls=lst,io} i sizeOfArray 
+|i   == sizeOfArray   = pst
+# minInd = (getMinInd  lst.map   i   sizeOfArray)
+=  (trace_n (toString minInd)) minSelectionSortAux (animateSwap pst i  minInd ) (i + 1) sizeOfArray   
+
+
+
+selectionSort :: (*PSt SState) -> (*PSt SState)
+selectionSort {ls=lst,io} = slAuxAux {ls=lst,io} 0 1 (size (lst.map))
 
 slAuxAux :: (*PSt SState) Int Int Int -> (*PSt SState)
 slAuxAux pst _ _ 1 = pst
