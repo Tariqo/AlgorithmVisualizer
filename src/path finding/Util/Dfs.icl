@@ -4,9 +4,6 @@ import StdEnv, StdIO, StdFunc, StdDebug
 import Util.Constants, Util.Rendering 
 
 
-
-
-
 dfs :: (*PSt AState) NodeA (Int,Int,Int)  -> (*PSt AState) 
 dfs pst=:{ls=lst,io=ios} node (a,b,c) 
 #seed = (a*(b)*c)
@@ -53,4 +50,5 @@ visitTemp :: {NodeA} NodeA -> {NodeA}
 visitTemp map node
 #index = ((node.nodeX-1)  + ((node.nodeY-1)* TILE_AMOUNT ))  - (2 * (node.nodeY-1))
 = {(\a b | b == index = {a & visited = True } = a)a b \\ a<-:map & b<-[0..]}
+
 
